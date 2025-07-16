@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main>
+
+    <form id="attendance-form">
+      <section class="daily-attendance">
+        <table class="daily-attendance">
+          <caption>Daily Attendance</caption>
+
+          <thead>
+            <tr>
+              <th>Teacher</th>
+              <th>Date & Time</th>
+              <th>Total Hours Studied</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="data">
+             <th><select name="Teacher" id="select-teacher">
+                <option value="Akhilesh">Akhilesh (Python)</option>
+                <option value="Gautam">Gautam (HTML CSS JAVASCRIPT)</option>
+                <option value="Siddharth">Siddharth (JAVASCRIPT)</option>
+              </select>
+              
+          
+          <td><input type="datetime-local" id="datetime-akh" name="datetime-akh"></td>
+          <td><input type="number" id="hours-akh" name="hours-akh"></td>
+          <td><button type="submit" name="submit" class="btn" value="akh">Submit</button></td>
+        </tr>
+
+            <!-- <tr class="data">
+              <th><span>Gautam (HTML CSS JACASCRIPT)</span></th>
+              <td><input type="datetime-local" id="datetime-gau" name="datetime-gau"></td>
+              <td><input type="number" id="hours-gau" name="hours-gau"></td>
+              <td><button type="submit" name="submit" value="gau">Submit</button></td>
+            </tr>
+
+            <tr class="data">
+              <th><span>Siddharth (JAVASCRIPT)</span></th>
+              <td><input type="datetime-local" id="datetime-sid" name="datetime-sid"></td>
+              <td><input type="number" id="hours-sid" name="hours-sid"></td>
+              <td><button type="submit" name="submit" value="sid">Submit</button></td>
+            </tr> -->
+
+          </tbody>
+        </table>
+      </section>
+
+     
+     
+
+      
+      <section class="attendance-history">
+        <table>
+          <caption>Attendance History</caption>
+          <thead>
+            <th>From</th>
+            <th>To</th>
+            <th>Action</th>
+          </thead>
+          <tbody class="attendanceTable" id="attendanceTable">
+            <tr>
+            <td><input id="attendanceFrom" type="date"></td>
+            <td><input id="attendanceTo" type="date"></td>
+            <td><button id="attendanceBtn">Show Result</button></td>
+            </tr>
+
+            <!-- <tr>
+            <td>2025-07-05</td>
+            <td>gautam</td>
+            <td>1 hr</td>
+            </tr> -->
+
+          </tbody>
+
+        </table>
+
+      </section>
+
+       </form>
+       <form id="payment-form">
+        <section class="payment-history">
+        <table>
+          <caption>Payment History</caption>
+          <thead>
+            <th>From</th>
+            <th>To</th>
+            <th>Action</th>
+          </thead>
+          <tbody id="paymentTable" class="paymentTable">
+            <td><input id="fromPayment" type="date"></td>
+            <td><input id="toPayment" type="date"></td>
+            <td><button id="paymentBtn">Show Result</button></td>
+
+            <!-- <tr>
+              <td>date</td>
+              <td>payee</td>
+              <td>amount</td>
+            </tr> -->
+
+          </tbody>
+
+        </table>
+
+      </section>
+
+       <section class="payment-info">
+
+        <table>
+           <caption>Payment Information</caption>
+           <thead>
+            <tr>
+             <th>Teacher</th>
+             <th>Remaining Classes</th>
+              <th>Payment Date</th>
+              <th>Amount Paid (Rs)</th>
+              <th>Action</th>
+              </tr>
+          </thead>
+
+          <tbody>
+            <tr class="data">
+              <th><select name="Teachers" id="teachers">
+                <option value="Akhilesh">Akhilesh (Python)</option>
+                <option value="Gautam">Gautam (HTML CSS JAVASCRIPT)</option>
+                <option value="Siddharth">Siddharth (JAVASCRIPT)</option>
+              </select>
+              <!-- <th><span>Akhilesh (Python)</span></th> -->
+              <td><span id="remaining-akh">24</span></td>
+              <td><input type="date" id="payment-akh" name="payment-akh"></td>
+              <td><input type="number" id="amount-akh" name="amount-akh"></td>
+               <td><button type="submit" name="submit" value="akh">Submit</button></td>
+            </tr>  
+
+            <!-- <tr class="data">
+              <th><span>Gautam (HTML CSS JAVASCRIPT)</span></th>
+              <td><span id="remaining-gau">24</span></td>
+              <td><input type="date" id="payment-gau" name="payment-gau"></td>
+              <td><input type="number" id="amount-gau" name="amount-gau"></td>
+              <td><button type="submit" name="submit" value="gau">Submit</button></td>
+            </tr>
+
+            <tr class="data">
+            <th><span>Siddharth (JAVASCRIPT)</span></th>
+            <td><span id="remaining-sid">24</span></td>
+              <td><input type="date" id="payment-sid" name="payment-sid"></td>
+              <td><input type="number" id="amount-sid" name="amount-sid"></td>
+              <td><button type="submit" name="submit" value="sid">Submit</button></td> -->
+
+        </table>
+      </section>
+     </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
