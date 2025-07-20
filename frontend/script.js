@@ -1,6 +1,6 @@
 function getAttendanceHistory(fromAttendance, toAttendance) {
   fetch(
-    `http://localhost:8090/api/v1/attendance/getAttendanceSheet?startDate=${fromAttendance}&endDate=${toAttendance}`
+    `https://onlineclasstracker-production.up.railway.app/api/v1/attendance/getAttendanceSheet?startDate=${fromAttendance}&endDate=${toAttendance}`
   )
     .then((res) => res.json())
     .then((data) => showAttendanceData(data.attendance));
@@ -13,15 +13,16 @@ const teachers = document.getElementById("teachers");
 const fromAttendance = document.getElementById("attendanceFrom");
 const toAttendance = document.getElementById("attendanceTo");
 const AttendancBtn = document.getElementById("attendanceBtn");
-const fromPayment = document.getElementById("fromPayment")
-const toPayment = document.getElementById("toPayment")
-const paymentBtn = document.getElementById("paymentBtn")
+const fromPayment = document.getElementById("fromPayment");
+const toPayment = document.getElementById("toPayment");
+const paymentBtn = document.getElementById("paymentBtn");
 
 function showAttendanceData(data) {
   let attendanceTable = document.getElementById("attendanceTable");
   data.map((item, index) => {
+    let localDate = new Date(item.dateAndTime);
     let singleAttendance = document.createElement("tr");
-    singleAttendance.innerHTML = `<td>${item.dateAndTime}</td>
+    singleAttendance.innerHTML = `<td>${localDate}</td>
             <td>${item.instructorName}</td>
             <td>${item.totalHoursStudied} hr</td>`;
     attendanceTable.append(singleAttendance);
@@ -29,19 +30,20 @@ function showAttendanceData(data) {
 }
 
 function getPaymentHistory() {
-  fetch("http://localhost:8090/api/v1/payment/getAllPayments")
+  fetch(
+    "https://onlineclasstracker-production.up.railway.app/api/v1/payment/getAllPayments"
+  )
     .then((res) => res.json())
     .then((data1) => showPaymentHistory(data1.payment));
 }
 
-
-
 function showPaymentHistory(data1) {
   let paymentTable = document.getElementById("paymentTable");
   data1.map((item, index) => {
+    let localTime = new Date(item.paymentDate)
     let singlepayment = document.createElement("tr");
     singlepayment.innerHTML = ` 
-              <td>${item.paymentDate}</td>
+              <td>${localTime}</td>
               <td>${item.payee}</td>
               <td>${item.amountPaid}</td>
             `;
@@ -60,7 +62,7 @@ async function getAttendanceData(event) {
   const teacherId = event.submitter.value; // "akh", "gau", or "sid"
   const dailyAttendanceInput = document.getElementById(`datetime-${teacherId}`);
   console.log(dailyAttendanceInput);
-  //  const dailyAttendanceDate = new Date(dailyAttendanceInput.value);
+   const dailyAttendanceDate = new Date(dailyAttendanceInput.value);
 
   //  let attendanceData= {
   //   "dateAndTime":dailyAttendanceDate,
@@ -77,14 +79,10 @@ async function getAttendanceData(event) {
     const remainingSpan = document.getElementById(`remaining-${teacherId}`);
     const currentRemaining = Number(remainingSpan.innerText);
 
-    console.log(
-      hoursValue,
-      dailyAttendanceDate.toISOString(),
-      selectTeacher.value
-    );
+   
 
     await fetch(
-      "http://localhost:8090/api/v1/attendance/createAttendanceSheet",
+      "https://onlineclasstracker-production.up.railway.app/api/v1/attendance/createAttendanceSheet",
       {
         method: "post",
         headers: {
@@ -130,17 +128,20 @@ function postPaymentData(event) {
 
   console.log(teachers.value, amountValue, date);
 
-  fetch("http://localhost:8090/api/v1/payment/createPayment", {
-    method: "post",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      paymentDate: paymentDate.value,
-      amountPaid: amountValue,
-      payee: teachers.value,
-    }),
-  })
+  fetch(
+    "https://onlineclasstracker-production.up.railway.app/api/v1/payment/createPayment",
+    {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        paymentDate: paymentDate.value,
+        amountPaid: amountValue,
+        payee: teachers.value,
+      }),
+    }
+  )
     .then((res) => res.json())
     .then((res) => {
       alert(res.message);
@@ -155,8 +156,6 @@ AttendancBtn.addEventListener("click", () => {
   getAttendanceHistory(fromAttendance.value, toAttendance.value);
 });
 
-
-paymentBtn.addEventListener("click", ()=>{
-
-  getPaymentHistory(fromPayment.value,toPayment.value);
-})
+paymentBtn.addEventListener("click", () => {
+  getPaymentHistory(fromPayment.value, toPayment.value);
+});
